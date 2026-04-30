@@ -30,14 +30,14 @@ export function WaitlistForm() {
 
   if (success) {
     return (
-      <div className="flex flex-col items-center justify-center p-8 bg-background/50 backdrop-blur-md border border-border/50 rounded-3xl shadow-sm animate-appear w-full">
-        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 mb-4 ring-1 ring-green-500/20">
-          <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-500" />
+      <div className="flex flex-col items-center justify-center p-8 w-full animate-appear bg-background border border-border/40 rounded-[2rem] shadow-sm">
+        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-foreground text-background mb-4 shadow-lg shadow-foreground/5">
+          <CheckCircle2 className="h-6 w-6" />
         </div>
-        <h3 className="text-lg font-semibold tracking-tight text-foreground mb-1.5 font-display">
-          You're on the list!
+        <h3 className="text-xl font-bold tracking-tight text-foreground mb-2 font-display">
+          You're on the list
         </h3>
-        <p className="text-sm text-muted-foreground text-center text-balance">
+        <p className="text-sm text-muted-foreground text-center text-balance font-medium">
           We'll notify you as soon as your beta workspace is ready.
         </p>
       </div>

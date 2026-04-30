@@ -16,13 +16,19 @@ export async function joinWaitlist(formData: FormData) {
   try {
     const { databases } = createAdminClient()
     
-    // Check if already exists to avoid duplicates if no unique index
-    const existing = await databases.listDocuments(DATABASE_ID, WAITLIST_COLLECTION, [
-      Query.equal('email', email)
-    ])
+    // Attempt to check if already exists using query (may fail if no index)
+    let isDuplicate = false;
+    try {
+      const existing = await databases.listDocuments(DATABASE_ID, WAITLIST_COLLECTION, [
+        Query.equal('email', email)
+      ])
+      if (existing.total > 0) isDuplicate = true;
+    } catch (queryError) {
+      // Ignore query error, likely missing index. We'll rely on unique constraint if available.
+    }
 
-    if (existing.total > 0) {
-      return { success: true } // Act like it worked to prevent spam/enumeration
+    if (isDuplicate) {
+      return { success: true } // Silently succeed
     }
 
     // Insert
@@ -54,13 +60,16 @@ export async function joinWaitlist(formData: FormData) {
         })
       } catch (emailError) {
         console.error('Failed to send Resend notification:', emailError)
-        // Do not throw error here, as the user successfully joined the waitlist
       }
     }
 
     return { success: true }
   } catch (error: any) {
     console.error('Waitlist error:', error)
-    return { error: 'Failed to join waitlist. Please try again later. Ensure the waitlist collection exists in Appwrite.' }
+    // If Appwrite throws a 409 Conflict (Duplicate due to unique index)
+    if (error?.code === 409 || error?.message?.toLowerCase().includes('duplicate')) {
+      return { success: true } // Silently succeed, don't spam the user with errors
+    }
+    return { error: 'Failed to join waitlist. Please try again later.' }
   }
 }
