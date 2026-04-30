@@ -48,47 +48,42 @@ export function HeroSection() {
             export as PNG, SVG, or HTML.
           </p>
 
-          {/* CTAs — Claude-style: black primary + outlined secondary */}
-          <div
-            className="relative z-10 flex flex-wrap justify-center gap-4
-            animate-appear opacity-0 [animation-delay:300ms]"
-          >
-            {/* Primary CTA — solid black */}
-            <Button
-              asChild
-              size="lg"
-              className={cn(
-                'h-12 rounded-full px-8 text-base font-semibold',
-                'bg-foreground text-background',
-                'hover:bg-foreground/90',
-                'shadow-lg shadow-foreground/10',
-                'transition-all duration-300',
-                'group',
-              )}
-            >
-              <Link href="/signup">
-                Start building for free
+          {/* Waitlist Form */}
+          <div className="relative z-10 w-full max-w-sm mx-auto mt-4 animate-appear opacity-0 [animation-delay:300ms]">
+            <form action={async (formData) => {
+              'use server';
+              const { joinWaitlist } = await import('@/app/actions/waitlist');
+              await joinWaitlist(formData);
+            }} className="flex flex-col gap-3">
+              <input
+                type="email"
+                name="email"
+                placeholder="you@company.com"
+                required
+                className={cn(
+                  "h-12 w-full rounded-full px-5 text-base",
+                  "bg-background/80 backdrop-blur-sm border border-border/50",
+                  "focus:outline-none focus:ring-2 focus:ring-foreground/20",
+                  "placeholder:text-muted-foreground",
+                  "shadow-sm"
+                )}
+              />
+              <Button
+                type="submit"
+                size="lg"
+                className={cn(
+                  'h-12 rounded-full w-full text-base font-semibold',
+                  'bg-foreground text-background',
+                  'hover:bg-foreground/90',
+                  'shadow-lg shadow-foreground/10',
+                  'transition-all duration-300',
+                  'group',
+                )}
+              >
+                Get Early Access
                 <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Link>
-            </Button>
-
-            {/* Secondary CTA — outlined, like Claude's "Contact sales" */}
-            <Button
-              asChild
-              size="lg"
-              variant="outline"
-              className={cn(
-                'h-12 rounded-full px-8 text-base font-medium',
-                'border-border text-foreground/70',
-                'hover:bg-secondary hover:text-foreground',
-                'transition-all duration-300',
-              )}
-            >
-              <a href="https://www.youtube.com/watch?v=hDBuOErbM0U" target="_blank" rel="noopener noreferrer">
-                <Play className="mr-2 h-4 w-4" />
-                Watch demo
-              </a>
-            </Button>
+              </Button>
+            </form>
           </div>
 
           {/* Mockup */}

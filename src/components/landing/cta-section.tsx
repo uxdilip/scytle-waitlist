@@ -21,25 +21,26 @@ export function CTASection() {
               It takes less than 5 minutes. Free to start, no credit card
               required.
             </p>
-            <div className="flex items-center gap-3">
-              <Button
-                asChild
-                size="lg"
-                className="h-11 rounded-full bg-foreground px-6 text-sm font-semibold text-background hover:bg-foreground/80"
-              >
-                <Link href={isAuthenticated ? '/dashboard' : '/signup'}>
-                  {isAuthenticated ? 'Go to Dashboard' : 'Get Started'}
-                </Link>
-              </Button>
-              <Button variant="link" asChild className="text-foreground">
-                <Link
-                  href={isAuthenticated ? '/dashboard' : '/login'}
-                  className="group gap-1"
+            <div className="w-full max-w-sm mt-4">
+              <form action={async (formData) => {
+                const { joinWaitlist } = await import('@/app/actions/waitlist');
+                await joinWaitlist(formData);
+              }} className="flex flex-col gap-3">
+                <input
+                  type="email"
+                  name="email"
+                  placeholder="you@company.com"
+                  required
+                  className="h-12 w-full rounded-full px-5 text-base bg-background/50 border border-border/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 placeholder:text-muted-foreground shadow-sm"
+                />
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="h-12 rounded-full w-full text-base font-semibold bg-foreground text-background hover:bg-foreground/90 transition-all duration-300"
                 >
-                  {isAuthenticated ? 'Open workspace' : 'Learn More'}
-                  <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                </Link>
-              </Button>
+                  Join the Waitlist
+                </Button>
+              </form>
             </div>
           </div>
         </ScrollReveal>

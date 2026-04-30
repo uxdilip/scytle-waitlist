@@ -129,7 +129,7 @@ export function LandingHeader() {
                         ) : (
                             <>
                                 <NavbarButton
-                                    href="/login"
+                                    href="https://beta.scytle.com/login"
                                     as={Link}
                                     variant="secondary"
                                     className="text-sm font-medium text-foreground"
@@ -137,7 +137,7 @@ export function LandingHeader() {
                                     Log in
                                 </NavbarButton>
                                 <NavbarButton
-                                    href="/signup"
+                                    href="https://beta.scytle.com/signup"
                                     as={Link}
                                     variant="primary"
                                     className="rounded-full bg-foreground text-background shadow-md hover:bg-foreground/90"
@@ -207,7 +207,7 @@ export function LandingHeader() {
                             ) : (
                                 <>
                                     <NavbarButton
-                                        href="/login"
+                                        href="https://beta.scytle.com/login"
                                         as={Link}
                                         variant="secondary"
                                         className="w-full text-foreground"
@@ -216,7 +216,7 @@ export function LandingHeader() {
                                         Log in
                                     </NavbarButton>
                                     <NavbarButton
-                                        href="/signup"
+                                        href="https://beta.scytle.com/signup"
                                         as={Link}
                                         variant="primary"
                                         className="w-full rounded-full bg-foreground text-background shadow-md"
