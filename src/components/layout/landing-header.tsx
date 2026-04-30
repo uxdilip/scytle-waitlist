@@ -18,7 +18,6 @@ import {
 const navItems = [
     { name: 'How it works', link: '#how-it-works' },
     { name: 'Features', link: '#features' },
-    { name: 'Pricing', link: '#pricing' },
 ]
 
 export function LandingHeader() {

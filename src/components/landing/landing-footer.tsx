@@ -20,7 +20,6 @@ const footerLinks = {
   product: [
     { label: 'How it works', href: '#how-it-works' },
     { label: 'Features', href: '#features' },
-    { label: 'Pricing', href: '#pricing' },
   ],
 
   legal: [
@@ -29,8 +28,8 @@ const footerLinks = {
     { label: 'Cookies', href: '/cookies' },
   ],
   socials: [
-    { label: 'Twitter / X', href: 'https://x.com' },
-    { label: 'YouTube', href: 'https://youtube.com' },
+    { label: 'Twitter / X', href: 'https://x.com/scytleai' },
+    { label: 'YouTube', href: 'https://www.youtube.com/@scytleofficial' },
   ],
 }
 

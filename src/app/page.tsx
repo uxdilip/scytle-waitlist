@@ -4,7 +4,6 @@ import { PhaseFlowSection } from '@/components/landing/phase-flow-section'
 import { FeatureShowcaseSection } from '@/components/landing/feature-showcase-section'
 import { WorkspaceSection } from '@/components/landing/workspace-section'
 import { ProofSection } from '@/components/landing/proof-section'
-import { PricingSection } from '@/components/landing/pricing-section'
 import { CTASection } from '@/components/landing/cta-section'
 import { LandingFooter } from '@/components/landing/landing-footer'
 
@@ -28,9 +27,6 @@ export default function LandingPage() {
 
       {/* Social proof */}
       <ProofSection />
-
-      {/* Pricing */}
-      <PricingSection />
 
       {/* Final CTA */}
       <CTASection />
