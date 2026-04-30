@@ -1,0 +1,515 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "../../node_modules/tw-shimmer/src/index.css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* ============================================
+   SCYTLE DESIGN SYSTEM
+   Structure-first, warm, professional
+   ============================================ */
+
+/** Viewport animation support (Houdini) */
+@property --z {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 1;
+}
+@property --px {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+@property --py {
+  syntax: "<number>";
+  inherits: true;
+  initial-value: 0;
+}
+
+.transition-viewport {
+  transition: --z 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              --px 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+              --py 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+:root {
+  /* Brand Colors - Warm terracotta/coral */
+  --brand: oklch(0.65 0.18 35);
+  
+  /* Generic hover accent (Claude-style muted gray) */
+  --accent: oklch(0.95 0.01 80);
+  --accent-foreground: oklch(0.18 0.02 260);
+
+  /* Primary - Rich dark */
+  --primary: oklch(0.18 0.02 260);
+  /* Deep navy-black #1C1C2E */
+  --primary-foreground: oklch(0.98 0 0);
+
+  /* Secondary - Soft cream/beige backgrounds */
+  --secondary: oklch(0.97 0.01 80);
+  /* Warm cream #FAF8F5 */
+  --secondary-foreground: oklch(0.25 0.02 260);
+
+  /* Background - Warm off-white with subtle warmth */
+  --background: oklch(0.99 0.005 80);
+  /* #FDFCFA */
+  --foreground: oklch(0.18 0.02 260);
+  /* Deep text */
+
+  /* Muted - Warm gray */
+  --muted: oklch(0.95 0.01 80);
+  /* #F5F3F0 */
+  --muted-foreground: oklch(0.55 0.02 260);
+
+  /* Cards - Pure white with subtle warmth */
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.18 0.02 260);
+
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.18 0.02 260);
+
+  /* Borders - Subtle warm gray */
+  --border: oklch(0.90 0.01 80);
+  /* #E8E5E0 */
+  --input: oklch(0.92 0.01 80);
+  --ring: oklch(0.65 0.18 35);
+  /* Accent for focus */
+
+  /* Semantic */
+  --destructive: oklch(0.55 0.22 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --success: oklch(0.55 0.18 150);
+  --success-foreground: oklch(1 0 0);
+
+  --warning: oklch(0.75 0.15 80);
+  --warning-foreground: oklch(0.2 0.02 80);
+
+  /* Charts */
+  --chart-1: oklch(0.65 0.18 35);
+  --chart-2: oklch(0.6 0.12 185);
+  --chart-3: oklch(0.45 0.08 260);
+  --chart-4: oklch(0.8 0.15 85);
+  --chart-5: oklch(0.7 0.16 330);
+
+  /* Sidebar */
+  --sidebar: oklch(0.98 0.005 80);
+  --sidebar-foreground: oklch(0.18 0.02 260);
+  --sidebar-primary: oklch(0.18 0.02 260);
+  --sidebar-primary-foreground: oklch(0.98 0 0);
+  --sidebar-accent: oklch(0.95 0.01 80);
+  --sidebar-accent-foreground: oklch(0.18 0.02 260);
+  --sidebar-border: oklch(0.90 0.01 80);
+  --sidebar-ring: oklch(0.65 0.18 35);
+
+  /* Radius */
+  --radius: 0.75rem;
+
+  /* Motion timing */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --duration-fast: 150ms;
+  --duration-normal: 200ms;
+  --duration-slow: 300ms;
+}
+
+/* Dark mode */
+.dark {
+  --background: oklch(0.14 0.02 260);
+  --foreground: oklch(0.95 0.01 80);
+
+  --card: oklch(0.18 0.02 260);
+  --card-foreground: oklch(0.95 0.01 80);
+
+  --popover: oklch(0.18 0.02 260);
+  --popover-foreground: oklch(0.95 0.01 80);
+
+  --primary: oklch(0.95 0.01 80);
+  --primary-foreground: oklch(0.14 0.02 260);
+
+  --secondary: oklch(0.22 0.02 260);
+  --secondary-foreground: oklch(0.95 0.01 80);
+
+  --muted: oklch(0.22 0.02 260);
+  --muted-foreground: oklch(0.65 0.02 260);
+
+  --accent: oklch(0.22 0.02 260);
+  --accent-foreground: oklch(0.95 0.01 80);
+
+  --border: oklch(0.28 0.02 260);
+  --input: oklch(0.28 0.02 260);
+  --ring: oklch(0.7 0.18 35);
+
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(1 0 0);
+
+  --sidebar: oklch(0.16 0.02 260);
+  --sidebar-foreground: oklch(0.95 0.01 80);
+  --sidebar-border: oklch(0.28 0.02 260);
+}
+
+@theme inline {
+  /* Colors */
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Fonts */
+  --font-sans: 'Inter', ui-sans-serif, system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+  --font-display: 'Bricolage Grotesque', 'Inter', sans-serif;
+
+  /* Radius */
+  --radius-sm: calc(var(--radius) - 0.25rem);
+  --radius-md: var(--radius);
+  --radius-lg: calc(var(--radius) + 0.25rem);
+  --radius-xl: calc(var(--radius) + 0.5rem);
+  --radius-2xl: calc(var(--radius) + 1rem);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  /* Shadows — tighter, more refined */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.04);
+  --shadow-md: 0 2px 8px -2px rgb(0 0 0 / 0.08), 0 1px 2px -1px rgb(0 0 0 / 0.04);
+  --shadow-lg: 0 8px 16px -4px rgb(0 0 0 / 0.08), 0 2px 4px -2px rgb(0 0 0 / 0.04);
+  --shadow-xl: 0 16px 32px -8px rgb(0 0 0 / 0.1), 0 4px 8px -4px rgb(0 0 0 / 0.04);
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.2s ease-out;
+  --animate-slide-up: slide-up 0.25s var(--ease-out-expo);
+  --animate-slide-down: slide-down 0.25s var(--ease-out-expo);
+  --animate-scale-in: scale-in 0.15s ease-out;
+}
+
+/* ============================================
+   BASE STYLES
+   ============================================ */
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  font-feature-settings: "rlig" 1, "calt" 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Selection */
+::selection {
+  background: oklch(0.65 0.18 35 / 0.15);
+  color: var(--foreground);
+}
+
+/* Scrollbar — thin and subtle */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: oklch(0.55 0.02 260 / 0.15);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: oklch(0.55 0.02 260 / 0.3);
+}
+
+/* Hide scrollbar utility */
+@utility scrollbar-none {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* ============================================
+   ANIMATIONS
+   ============================================ */
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slide-down {
+  from { opacity: 0; transform: translateY(-8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(0.96); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+/* Sidebar slide-in (mobile) */
+@keyframes slide-in-from-left {
+  from { transform: translateX(-100%); }
+  to { transform: translateX(0); }
+}
+
+/* Wireframe page staggered entry animation */
+@keyframes wireframe-page-in {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* AI generation — node reveal animation */
+@keyframes node-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* AI generation — per-frame glow pulse (applied to active generating frame) */
+@keyframes gen-glow-pulse {
+  0%, 100% {
+    box-shadow: 0 0 0 2px oklch(0.65 0.18 35 / 0.2), 0 0 12px oklch(0.65 0.18 35 / 0.06);
+  }
+  50% {
+    box-shadow: 0 0 0 2px oklch(0.65 0.18 35 / 0.4), 0 0 24px oklch(0.65 0.18 35 / 0.12);
+  }
+}
+
+/* Node hidden while waiting in reveal queue — data attribute selector */
+[data-gen-state="hidden"] {
+  opacity: 0 !important;
+  pointer-events: none;
+}
+
+/* Node reveal animation (leaf/visual nodes) — data attribute selector */
+[data-gen-state="revealing"] {
+  animation: node-reveal 0.28s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Node fully revealed — data attribute selector */
+[data-gen-state="revealed"] {
+  /* opacity returns to node's own value (no override needed) */
+}
+
+/* Active generating frame — subtle pulsing glow border */
+.gen-frame-active {
+  animation: gen-glow-pulse 2s ease-in-out infinite;
+}
+
+/* Reduced motion: instant reveal for all nodes */
+@media (prefers-reduced-motion: reduce) {
+  [data-gen-state="revealing"] {
+    animation: none;
+    opacity: 1 !important;
+    transform: none;
+  }
+  .gen-frame-active {
+    animation: none;
+    box-shadow: 0 0 0 2px oklch(0.65 0.18 35 / 0.3);
+  }
+}
+
+/* ============================================
+   UTILITIES
+   ============================================ */
+
+.text-balance {
+  text-wrap: balance;
+}
+
+.animate-in {
+  animation: var(--animate-fade-in);
+}
+
+/* Typography */
+.font-display {
+  font-family: var(--font-display);
+}
+
+/* Gradient text */
+.gradient-text {
+  background: linear-gradient(135deg, var(--foreground) 0%, oklch(0.65 0.18 35) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Container — kept for backward compatibility with non-redesigned pages */
+.container {
+  width: 100%;
+  max-width: 1280px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+@media (min-width: 640px) {
+  .container {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    padding-left: 4rem;
+    padding-right: 4rem;
+  }
+}
+
+/* Gradient backgrounds */
+.bg-gradient-radial {
+  background: radial-gradient(circle at 50% 0%, oklch(0.65 0.18 35 / 0.08) 0%, transparent 50%);
+}
+
+.bg-gradient-warm {
+  background: linear-gradient(180deg, oklch(0.97 0.01 80) 0%, oklch(0.99 0.005 80) 100%);
+}
+
+/* Card hover — subtle lift (Claude-inspired) */
+.card-hover {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.08), 0 4px 8px -4px rgba(0, 0, 0, 0.04);
+  border-color: oklch(0.80 0.01 80);
+}
+
+.dark .card-hover:hover {
+  box-shadow: 0 12px 24px -10px rgba(0, 0, 0, 0.5), 0 4px 8px -4px rgba(0, 0, 0, 0.3);
+  border-color: oklch(0.35 0.02 260);
+}
+
+/* ============================================
+   LANDING PAGE ANIMATIONS
+   ============================================ */
+
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes border-beam {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ============================================
+   HERO APPEAR ANIMATIONS (LaunchUI pattern)
+   ============================================ */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes appear-zoom {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.animate-appear {
+  animation: appear 0.6s ease-out both;
+}
+
+.animate-appear-zoom {
+  animation: appear-zoom 0.8s ease-out both;
+}
+
+/* ============================================
+   BASE LAYER
+   ============================================ */
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Footer text selection — ensures highlighted text is readable on dark bg */
+[data-footer-dark] ::selection {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+}
+[data-footer-dark]::selection {
+  background: rgba(255, 255, 255, 0.9);
+  color: #111;
+}
