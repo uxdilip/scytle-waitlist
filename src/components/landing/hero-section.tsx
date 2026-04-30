@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button'
 import { Mockup } from '@/components/ui/mockup'
 import { Glow } from '@/components/ui/glow'
 import { HeroVideo } from '@/components/landing/hero-video'
+import { WaitlistForm } from '@/components/landing/waitlist-form'
 
 export function HeroSection() {
   return (
@@ -50,40 +51,7 @@ export function HeroSection() {
 
           {/* Waitlist Form */}
           <div className="relative z-10 w-full max-w-sm mx-auto mt-4 animate-appear opacity-0 [animation-delay:300ms]">
-            <form action={async (formData) => {
-              'use server';
-              const { joinWaitlist } = await import('@/app/actions/waitlist');
-              await joinWaitlist(formData);
-            }} className="flex flex-col gap-3">
-              <input
-                type="email"
-                name="email"
-                placeholder="you@company.com"
-                required
-                className={cn(
-                  "h-12 w-full rounded-full px-5 text-base",
-                  "bg-background/80 backdrop-blur-sm border border-border/50",
-                  "focus:outline-none focus:ring-2 focus:ring-foreground/20",
-                  "placeholder:text-muted-foreground",
-                  "shadow-sm"
-                )}
-              />
-              <Button
-                type="submit"
-                size="lg"
-                className={cn(
-                  'h-12 rounded-full w-full text-base font-semibold',
-                  'bg-foreground text-background',
-                  'hover:bg-foreground/90',
-                  'shadow-lg shadow-foreground/10',
-                  'transition-all duration-300',
-                  'group',
-                )}
-              >
-                Get Early Access
-                <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
-              </Button>
-            </form>
+            <WaitlistForm />
           </div>
 
           {/* Mockup */}

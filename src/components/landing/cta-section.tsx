@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { useAuthStore } from '@/store'
 import { ScrollReveal } from '@/components/ui/scroll-reveal'
+import { WaitlistForm } from '@/components/landing/waitlist-form'
 
 export function CTASection() {
   const { isAuthenticated } = useAuthStore()
@@ -22,25 +23,7 @@ export function CTASection() {
               required.
             </p>
             <div className="w-full max-w-sm mt-4">
-              <form action={async (formData) => {
-                const { joinWaitlist } = await import('@/app/actions/waitlist');
-                await joinWaitlist(formData);
-              }} className="flex flex-col gap-3">
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="you@company.com"
-                  required
-                  className="h-12 w-full rounded-full px-5 text-base bg-background/50 border border-border/50 focus:outline-none focus:ring-2 focus:ring-foreground/20 placeholder:text-muted-foreground shadow-sm"
-                />
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="h-12 rounded-full w-full text-base font-semibold bg-foreground text-background hover:bg-foreground/90 transition-all duration-300"
-                >
-                  Join the Waitlist
-                </Button>
-              </form>
+              <WaitlistForm />
             </div>
           </div>
         </ScrollReveal>
