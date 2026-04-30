@@ -49,20 +49,14 @@ export function LandingHeader() {
                     {/* Right actions */}
                     <div className="relative z-20 flex items-center gap-3">
                         <NavbarButton
-                            href="https://beta.scytle.com/login"
-                            as={Link}
-                            variant="secondary"
-                            className="text-sm font-medium text-foreground"
-                        >
-                            Log in
-                        </NavbarButton>
-                        <NavbarButton
-                            href="https://beta.scytle.com/signup"
-                            as={Link}
+                            as="button"
                             variant="primary"
                             className="rounded-full bg-foreground text-background shadow-md hover:bg-foreground/90"
+                            onClick={() => {
+                                window.scrollTo({ top: 0, behavior: 'smooth' });
+                            }}
                         >
-                            Get Started
+                            Join Waitlist
                         </NavbarButton>
                     </div>
                 </NavBody>
@@ -103,22 +97,15 @@ export function LandingHeader() {
                         ))}
                         <div className="flex w-full flex-col gap-3 pt-2">
                             <NavbarButton
-                                href="https://beta.scytle.com/login"
-                                as={Link}
-                                variant="secondary"
-                                className="w-full text-foreground"
-                                onClick={() => setMobileOpen(false)}
-                            >
-                                Log in
-                            </NavbarButton>
-                            <NavbarButton
-                                href="https://beta.scytle.com/signup"
-                                as={Link}
+                                as="button"
                                 variant="primary"
                                 className="w-full rounded-full bg-foreground text-background shadow-md"
-                                onClick={() => setMobileOpen(false)}
+                                onClick={() => {
+                                    setMobileOpen(false);
+                                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                                }}
                             >
-                                Get Started
+                                Join Waitlist
                             </NavbarButton>
                         </div>
                     </MobileNavMenu>
